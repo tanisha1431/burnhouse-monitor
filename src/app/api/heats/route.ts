@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = request.nextUrl;
-    const from = searchParams.get("from") || new Date().toISOString().split("T")[0];
+    const now = new Date();
+    const from = searchParams.get("from") || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
     const to = searchParams.get("to") || from;
     const format = searchParams.get("format") || "all";
     const status = searchParams.get("status") || "all";
